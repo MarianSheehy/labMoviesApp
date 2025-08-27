@@ -23,13 +23,17 @@ const styles = {
   },
 };
 
+const FilterMoviesCard: React.FC= () => {
 
-  const FilterMoviesCard: React.FC= () => {
-
-  const genres = [
+const genres = [
     {id: 1, name: "Animation"},
     {id: 2, name: "Comedy"},
     {id: 3, name: "Thriller"}
+  ]
+
+const production_countries = [
+    {iso_3166_1: "US", name: "United States of America"},
+    {iso_3166_1: "FR", name: "France"}
   ]
 
   return (
@@ -62,6 +66,19 @@ const styles = {
             })}
           </Select>
         </FormControl>
+        <InputLabel id="country-label">Production Countries</InputLabel>
+          <Select
+            labelId="country-label"
+            id="country-select"
+          >
+            {production_countries.map((country) => {
+              return (
+                <MenuItem key={country.iso_3166_1} value={country.iso_3166_1}>
+                  {country.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
       </CardContent>
     </Card>
     <Card sx={styles.root} variant="outlined">
