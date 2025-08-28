@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,8 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { FilterOption } from "../../types/interfaces";
+import { SelectChangeEvent } from "@mui/material";
 
 const styles = {
   root: {
@@ -23,15 +25,42 @@ const styles = {
   },
 };
 
-const FilterMoviesCard: React.FC= () => {
+interface FilterMoviesCardProps {
+  titleFilter: string;
+  genreFilter: string;
+};
 
-const genres = [
-    {id: 1, name: "Animation"},
-    {id: 2, name: "Comedy"},
-    {id: 3, name: "Thriller"}
-  ]
+const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter }) => {
+  const [genres, setGenres] = useState([{ id: '0', name: "All" }])
 
-const production_countries = [
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_KEY}`
+    )
+      .then(res => res.json())
+      .then(json => {
+        return json.genres
+      })
+      .then(apiGenres => {
+        setGenres([genres[0], ...apiGenres]);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
+    e.preventDefault()
+    // Completed later
+  };
+
+  const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e, "title", e.target.value)
+  }
+
+  const handleGenreChange = (e: SelectChangeEvent) => {
+    handleChange(e, "genre", e.target.value)
+  };
+
+  const production_countries = [
     {iso_3166_1: "US", name: "United States of America"},
     {iso_3166_1: "FR", name: "France"}
   ]
@@ -49,13 +78,17 @@ const production_countries = [
           id="filled-search"
           label="Search field"
           type="search"
+          value={titleFilter}
           variant="filled"
+          onChange={handleTextChange}
         />
         <FormControl sx={styles.formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
             labelId="genre-label"
             id="genre-select"
+            value={genreFilter}
+            onChange={handleGenreChange}
           >
             {genres.map((genre) => {
               return (
