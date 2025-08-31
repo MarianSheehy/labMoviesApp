@@ -1,13 +1,15 @@
 import React from "react";
-import PageTemplate from "../components/templateMovieListPage";
 import { getPopularCast} from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
 import { BaseMovieProps } from "../types/interfaces";
+import CastList from "../components/castList";
+import { Box, Grid } from "@mui/material";
+import Header from "../components/headerMovieList";
 
 const PopularCastPage: React.FC = () => {
-  const { data: movies, error, isLoading, isError } = useQuery<BaseMovieProps[], Error>("popular", getPopularCast);
+  const { data: actors, error, isLoading, isError } = useQuery<BaseMovieProps[], Error>("popular", getPopularCast);
 
   if (isLoading) {
     return <Spinner />;
@@ -18,13 +20,21 @@ const PopularCastPage: React.FC = () => {
   }
 
   return (
-    <PageTemplate
-      title="Most Popular Cast"
-      movies={movies || []}
-      action={(movie) => {
-        return <AddToFavouritesIcon {...movie} />
-      }}
-    />
+    <Box sx={{ marginTop: "150px", padding: 2 }}>
+      <Grid container>
+        <Grid item xs={12}>
+          <Header title="Popular Cast" />
+        </Grid>
+        <Grid item container spacing={5} sx={{ marginTop: 2 }}>
+          <CastList 
+            actors={actors || []} 
+            action={(actor) => {
+              return <AddToFavouritesIcon {...actor} />
+            }}
+          />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
