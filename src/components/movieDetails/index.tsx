@@ -66,9 +66,19 @@ const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
                 />
                 <Chip
                     icon={<StarRate />}
-                    label={`${movie.vote_average} (${movie.vote_count}`}
+                    label={`${movie.vote_average} (${movie.vote_count})`}
                 />
                 <Chip label={`Released: ${movie.release_date}`} />
+            </Paper>
+            <Paper component="ul" sx={styles.chipSet}>
+                <li>
+                    <Chip label="Countries" sx={styles.chipLabel} color="primary" />
+                </li>
+                {movie.production_countries.map((g) => (
+                    <li key={g.name}>
+                        <Chip label={g.name} />
+                    </li>
+                ))}
             </Paper>
             <Fab
                 color="secondary"

@@ -23,7 +23,7 @@ export interface MovieDetailsProps extends BaseMovieProps {
     id: number;
     name: string;
   }[];
-  production_countries: {  
+  production_countries: {
     iso_3166_1: string;
     name: string;
   }[];
@@ -37,7 +37,7 @@ export interface MovieImage {
   vote_average?: number;
   vote_count?: number;
   width?: number;
-} 
+}
 
 export interface MoviePageProps {
   movie: MovieDetailsProps;
@@ -51,7 +51,7 @@ export interface BaseMovieListProps {
 
 export type FilterOption = "title" | "genre";
 
-export interface Review{
+export interface Review {
   id: string;
   content: string
   author: string
@@ -65,19 +65,27 @@ export interface GenreData {
 }
 
 export interface DiscoverMovies {
-  page: number;	
+  page: number;
   total_pages: number;
   total_results: number;
   results: BaseMovieProps[];
 }
 
-  export interface Review {
-    author: string,
-    content: string,
-    agree: boolean,
-    rating: number,
-    movieId: number,
-  }
+export interface Review {
+  author: string,
+  content: string,
+  agree: boolean,
+  rating: number,
+  movieId: number,
+}
+
+export interface DiscoverShows {
+  page: number;
+  total_pages: number;
+  total_results: number;
+  results: BaseMovieProps[];
+}
+
 
 
 

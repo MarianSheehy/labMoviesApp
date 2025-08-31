@@ -28,11 +28,11 @@ const SiteHeader: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const menuOptions = [
-    { label: "Home", path: "/" },
+    { label: "Movies", path: "/" },
+    { label: "Shows", path: "/movies/shows" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Favorites", path: "/movies/favourites" },
-    { label: "Option 3", path: "/" },
-    { label: "Option 4", path: "/" },
+    { label: "Popular Cast", path: "/movies/popular" },
   ];
 
   const handleMenuSelect = (pageURL: string) => {
@@ -51,7 +51,7 @@ const SiteHeader: React.FC = () => {
             TMDB Client
           </Typography>
           <Typography variant="h6" sx={styles.title}>
-            All you ever wanted to know about Movies!
+            All you ever wanted to know about Movies & TV!
           </Typography>
           {isMobile ? (
             <>

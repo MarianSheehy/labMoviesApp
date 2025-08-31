@@ -29,7 +29,6 @@ const FavouriteMoviesPage: React.FC = () => {
     [titleFiltering, genreFiltering]
   );
 
-  // Create an array of queries and run them in parallel.
   const favouriteMovieQueries = useQueries(
     movieIds.map((movieId) => {
       return {
@@ -39,7 +38,7 @@ const FavouriteMoviesPage: React.FC = () => {
     })
   );
 
-  // Check if any of the parallel queries is still loading.
+  
   const isLoading = favouriteMovieQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
