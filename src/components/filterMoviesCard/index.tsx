@@ -95,7 +95,8 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
             })}
           </Select>
         </FormControl>
-        <InputLabel id="country-label">Production Countries</InputLabel>
+        {/* Production Countries dropdown removed or replace with actual data source if available */}
+        {/* <InputLabel id="country-label">Production Countries</InputLabel>
           <Select
             labelId="country-label"
             id="country-select"
@@ -107,7 +108,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
                 </MenuItem>
               );
             })}
-          </Select>
+          </Select> */}
       </CardContent>
     </Card>
     <Card sx={styles.root} variant="outlined">
