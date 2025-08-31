@@ -29,6 +29,9 @@ const styles = {
         top: 50,
         right: 2,
     },
+    avatar: {
+    backgroundColor: "rgb(255, 0, 0)",
+  },
 };
 
 const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
