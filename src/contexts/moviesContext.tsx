@@ -6,20 +6,25 @@ interface MovieContextInterface {
     favourites: number[];
     addToFavourites: ((movie: BaseMovieProps) => void);
     removeFromFavourites: ((movie: BaseMovieProps) => void);
-    addReview: ((movie: BaseMovieProps, review: Review) => void);  // NEW
+    addReview: ((movie: BaseMovieProps, review: Review) => void);
+    addToPlaylist: ((movie: BaseMovieProps) => void);
+    playlist: number[];
 }
 const initialContextState: MovieContextInterface = {
     favourites: [],
     addToFavourites: () => {},
     removeFromFavourites: () => {},
-    addReview: (movie, review) => { movie.id, review},  // NEW
+    addReview: (movie, review) => { movie.id, review},
+    addToPlaylist: () => {},
+    playlist: [],
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
 
 const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
-    const [myReviews, setMyReviews] = useState<Review[]>([]); // NEW
+    const [myReviews, setMyReviews] = useState<Review[]>([]);
+    const [playlist, setPlaylist] = useState<number[]>([]);
 
     const addToFavourites = useCallback((movie: BaseMovieProps) => {
         setFavourites((prevFavourites) => {
@@ -34,6 +39,17 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         setFavourites((prevFavourites) => prevFavourites.filter((mId) => mId !== movie.id));
     }, []);
 
+    const addToPlaylist = (movie:BaseMovieProps) => {   // NEW
+        setPlaylist( (prevPlaylist) => {
+            if (!prevPlaylist.includes(movie.id)) {   
+                const newPlaylist = [...prevPlaylist, movie.id];
+                console.log("Updated Playlist:", newPlaylist);          
+                return newPlaylist;
+            }
+            return prevPlaylist;
+        });
+    };      
+
     const addReview = (movie:BaseMovieProps, review: Review) => {   // NEW
         setMyReviews( {...myReviews, [movie.id]: review } )
       };
@@ -45,6 +61,8 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
                 addToFavourites,
                 removeFromFavourites,
                 addReview,
+                addToPlaylist,
+                playlist,        
             }}
         >
             {children}
