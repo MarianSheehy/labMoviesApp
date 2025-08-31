@@ -6,7 +6,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import SortIcon from '@mui/icons-material/Sort';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { FilterOption, GenreData } from "../../types/interfaces";
@@ -62,7 +61,6 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
   };
 
   return (
-    <>
     <Card sx={styles.root} variant="outlined">
       <CardContent>
         <Typography variant="h5" component="h1">
@@ -95,32 +93,9 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreF
             })}
           </Select>
         </FormControl>
-        {/* Production Countries dropdown removed or replace with actual data source if available */}
-        {/* <InputLabel id="country-label">Production Countries</InputLabel>
-          <Select
-            labelId="country-label"
-            id="country-select"
-          >
-            {production_countries.map((country) => {
-              return (
-                <MenuItem key={country.iso_3166_1} value={country.iso_3166_1}>
-                  {country.name}
-                </MenuItem>
-              );
-            })}
-          </Select> */}
       </CardContent>
     </Card>
-    <Card sx={styles.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h1">
-            <SortIcon fontSize="large" />
-            Sort the movies.
-          </Typography>
-        </CardContent>
-      </Card>
-      </>
   );
-}
+};
 
 export default FilterMoviesCard;

@@ -2,7 +2,13 @@ import React from "react";
 import Header from "../headerMovieList";
 import Grid from "@mui/material/Grid";
 import MovieList from "../movieList";
-import { MovieListPageTemplateProps} from "../../types/interfaces";
+import { BaseMovieProps} from "../../types/interfaces";
+
+interface MovieListPageTemplateProps {
+  movies: BaseMovieProps[];
+  title: string;
+  action: (m: BaseMovieProps) => React.ReactNode;
+}
 
 const styles = {
   root: { 
