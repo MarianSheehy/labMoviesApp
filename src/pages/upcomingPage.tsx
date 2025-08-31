@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api";
+import useFiltering from "../hooks/useFiltering";
+
 
 const UpcomingPage: React.FC = () => {
   const [movies, setMovies] = useState<BaseMovieProps[]>([]);
-  const favourites = movies.filter(m => m.favourite)
+  const favourites = movies.filter(m => m.favourite);
+
   localStorage.setItem('favourites', JSON.stringify(favourites))
   // New function
   const addToFavourites = (movieId: number) => {
@@ -14,6 +17,8 @@ const UpcomingPage: React.FC = () => {
     );
     setMovies(updatedMovies);
   };
+
+
 
    useEffect(() => {
     getUpcomingMovies().then(movies => {

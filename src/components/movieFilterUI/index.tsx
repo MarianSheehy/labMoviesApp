@@ -32,7 +32,6 @@ interface MovieFilterUIProps {
     genreFilter: string;
 }
 
-
 const MovieFilterUI: React.FC<MovieFilterUIProps> = ({ onFilterValuesChange, titleFilter, genreFilter }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
